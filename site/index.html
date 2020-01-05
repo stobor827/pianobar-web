@@ -45,23 +45,43 @@
 			function handleNewTrack( data ){
 				document.getElementById( 'currentlyPlaying' ).innerHTML = data.date;
 			}
+			function handleStations(data){
+				console.log(data);
+				document.getElementById("pblist").innerHTML = data.content;
+			}
 			socket.on( 'date', handleNewTrack );
+			socket.on('stations', handleStations);
 			function play(){
 				console.log("play");
 				socket.emit("play");
+				showCurrPlaying();
 			}
 			function next(){
 				console.log("next");
 				socket.emit("next");
+				showCurrPlaying();
 			}
 			function stations(){
 				console.log("stations");
+				showStations();
+			}
+			function changeStation(i){
+				socket.emit("changeStation", {station:i});
+				showCurrPlaying();
+			}
+			function showCurrPlaying(){
+				document.getElementById("pblist").style.display = 'none';
+				document.getElementById("currentlyPlaying").style.display = 'block';
+			}
+			function showStations(){
+				document.getElementById("pblist").style.display = 'block';
+				document.getElementById("currentlyPlaying").style.display = 'none';
 			}
 		</script>
 		<script src="iosScroll.js"></script>
 	</HEAD>
 	<BODY bgcolor="#3D3C47" style="color:#DDDDDD">
-		<div id="pblist" class="scrollable">
+		<div id="pblist" class="scrollable" style="display:none;">
 
 		</div>
 		<div id="currentlyPlaying" class="album">
