@@ -18,6 +18,7 @@ server.listen(8006);
 console.log("start");  
 
 function sendCurrentlyPlaying(socket){
+  console.log("sendcurrently playing");
   var str = fs.readFileSync( 'pb.html', 'utf8');
   if( str == "" ){
     return;
@@ -28,25 +29,31 @@ function sendCurrentlyPlaying(socket){
   )
 }
 
+var ctlStream = fs.createWriteStream( 'ctl');
+
 io.sockets.on('connection', function (socket) {
   console.log("connected");
 
+  
   //read stationlist and send it to client.
   var stationList = fs.readFileSync('pblist.html', 'utf8');
   if( stationList != ""){
     socket.emit('stations', {content:stationList});
   }
   sendCurrentlyPlaying(socket);
-  fs.watch( 'pb.html', sendCurrentlyPlaying(socket) );
+  fs.watch( 'pb.html', function(){ sendCurrentlyPlaying(socket)} );
 
   socket.on("play",function (data){
     console.log("play");
+    ctlStream.write('p\n');
   });
   socket.on("next",function (data){
     console.log("next");
+    ctlStream.write('n\n');
   });
   socket.on("changeStation", function( data){
     console.log("changeStation", data.station);
+    ctlStream.write('s' + data.station + '\n');
   })
 });
 
