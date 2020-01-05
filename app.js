@@ -15,8 +15,14 @@ var server = http.createServer( function onRequest(req,res){
 })
 io = io.listen(server);
 server.listen(8006);
-  
+console.log("start");  
 io.sockets.on('connection', function (socket) {
+  console.log("connected");
+
+  //read stationlist and send it to client.
+
+
+
   fs.watch( '/var/www/html/pianobar/pb.html',
   function( ev, file){
         var str = fs.readFileSync( '/var/www/html/pianobar/pb.html', 'utf8');
@@ -29,4 +35,11 @@ io.sockets.on('connection', function (socket) {
         )
       }
     );
+  socket.on("play",function (socket){
+    console.log("play");
+  });
+  socket.on("next",function (socket){
+    console.log("next");
+  });
 });
+
