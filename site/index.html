@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+		<TITLE>PianoBar Web</TITLE>
+		<link rel="manifest" href="manifest.json">
+		<!--
+		Icons from: http://www.flaticon.com/packs/line-icon-set
+		Icans used under CC By 3
+		-->
+
+		<!-- IOS-specific meta tags for standalone web app -->
+		<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1.0"><!-- important for NOT zooming the window-->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="apple-touch-icon-precomposed" href="touch-icon-iphone.png"/>
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icon-ipad.png"/>
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icon-iphone-retina.png"/>
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="touch-icon-ipad-retina.png"/>
+		<!-- iPhone -->
+		<link href="apple-touch-startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<!-- iPhone (Retina) -->
+		<link href="apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<!-- iPhone 5 -->
+		<link href="apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<!-- iPad (portrait) -->
+		<link href="apple-touch-startup-image-768x1004.png"  media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<!-- iPad (landscape) -->
+		<link href="apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+		<!-- iPad (Retina, portrait) -->
+		<link href="apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+		<!-- iPad (Retina, landscape) -->
+		<link href="apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache"><!-- prevent caching of page info.  -->
+		<link href="style.css" rel="stylesheet" media="screen" type="text/css" />
+
+
+		<!-- these 2 script sections handle the async js with node.js for updating the currently playing info -->
+		<script src="socket.io/socket.io.js"></script>
+		<script>
+			var url = new URL(location);
+			console.log(url);
+			var socket = io.connect( url.origin, {path:url.pathname + 'socket.io'} );
+			function handleNewTrack( data ){
+				document.getElementById( 'currentlyPlaying' ).innerHTML = data.date;
+			}
+			socket.on( 'date', handleNewTrack );
+		</script>
+		<script src="iosScroll.js"></script>
+	</HEAD>
+	<BODY bgcolor="#3D3C47" style="color:#DDDDDD">
+		<div id="pblist" class="scrollable">
+
+		</div>
+		<div id="currentlyPlaying" class="album">
+
+		</div>
+		<div class="nav">
+			<table width="100%">
+				<TR>
+					<TD height="1" colspan="6"><center><hr></td>
+				</tr>
+				<tr height="1" valign="center">
+					<td width=15></td>
+					<td><a onclick="window.location='pianobar.php'"><img src="curve19.png" style="vertical-align:middle" border="none" width="100%"></a></td>
+					<td><a onclick="window.location='pianobar.php?action=pause'"><img src="round31.png" style="vertical-align:middle" border="none" width="100%"></a></td>
+					<td><a onclick="window.location='pianobar.php?action=next'"><img src="fast10.png" style="vertical-align:middle" border="none" width="100%"></a></td>
+					<td><a onclick="window.location='pianobar.php?action=stations'"><img src="cogwheel8.png" style="vertical-align:middle" border="none" width="100%"></a></td>
+					<td width=15></TD>
+				</tr>
+			</TABLE>
+		</div>
+	</BODY>
+</HTML>

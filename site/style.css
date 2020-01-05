@@ -1,0 +1,51 @@
+* {
+    border-style:solid;
+	border-color:red;
+	border: 0px;
+	margin: 0px;
+	
+}
+
+.scrollable {
+height:80%;
+width:100%;
+display:inline-block;
+position:absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: auto;
+overflow: scroll;
+
+
+/*overflow-y: hidden;*/
+/*-webkit-overflow-scrolling: touch;*/
+}
+
+.album {
+  height:85%;
+}
+
+body{overflow:hidden;border-color:red;}
+
+.nav {
+display:inline-block;
+position:absolute;
+bottom: 0;
+width:100%;
+border:0px solid red;
+}
+
+table.list {
+  background-color:white;
+  width: 100%;
+  color: black;
+  border: 1px solid black;
+}
+
+table.list td{
+  border: 1px solid black;
+  color: black;
+  height: 55px;
+}
+
