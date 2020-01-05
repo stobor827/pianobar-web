@@ -8,6 +8,12 @@ pianobar (https://github.com/PromyLOPh/pianobar) is a cmdline pandora client.<br
 This node.js app uses the built-in scripting extensions to remotely control an instance from the web.<br>
 you can view current artist, skip tracks, and change station.<br>
 
+## demo
+
+You can preview the app here:<br>
+https://stobor827-pianobar-web.glitch.me/<br>
+It's not hooked up to a pb instance, so the image/data will be static, but it gives an idea of the look & feel.
+
 ## Installation
 
  * clone/download to a useful dir.
