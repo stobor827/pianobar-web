@@ -2,6 +2,12 @@
 
 a Node.js site for controlling a headless instance of pianobar, optimized for use as a pwa on ios.
 
+## about 
+
+pianobar (https://github.com/PromyLOPh/pianobar) is a cmdline pandora client.<br>
+This node.js app uses the built-in scripting extensions to remotely control an instance from the web.<br>
+you can view current artist, skip tracks, and change station.<br>
+
 ## Installation
 
  * clone/download to a useful dir.
